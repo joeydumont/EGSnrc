@@ -52,6 +52,21 @@ REPLACE {$RANGE-DISCARD;} WITH {;
     ]
 };
 
+/*
+   We want to have an additional array of ints for
+   the particle stack, which will have the splitting numbers
+ */
+REPLACE {;COMIN/STACK-EXTRA/;} WITH {
+  common/extra_stack/ nbr_splitting($MXSTACK), nbr_splittingI;
+  $INTEGER            nbr_splitting, nbr_splittingI;
+};
+APPEND {;COMIN/STACK-EXTRA/;} TO {;COMIN/STACK/;};
+REPLACE {$TRANSFERPROPERTIESTO#FROM#;} WITH {
+    X{P1}=X{P2};Y{P1}=Y{P2};Z{P1}=Z{P2};IR{P1}=IR{P2};
+    WT{P1}=WT{P2};DNEAR{P1}=DNEAR{P2};LATCH{P1}=LATCH{P2};
+    nbr_splitting{P1}=nbr_splitting{P2};
+};
+
 subroutine do_rayleigh;
 implicit none;
 $declare_max_medium;
