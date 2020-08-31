@@ -521,8 +521,22 @@ data file, etc.).
 A consequence of not having an option for parallel execution is that
 lengthy calculations cannot be run on multiple cores, for instance on a computer cluster
 or a multicore processor PC.
-This limitation makes the creation of large databases spanning an energy range from threshold
-up to several MeV very time consuming. As the energy of the initial particle increases, more energetic electrons are created which have to be followed in an infinite geometry until they have lost all their kinetic energy. It is hence more practical to create individual input files for  each energy, and submit individual calculations. Furthermore, one can take advantage of the energy dependence of the mass energy transfer and absorption coefficients and use a logarithmic energy grid to reduce the number of high energy data points.
+This limitation makes the creation of large @muen_rho or @mutr_rho databases spanning an energy range from threshold up to several MeV very time consuming. As the energy of the initial particle increases, more energetic electrons are created which have to be followed in an infinite geometry until they have lost all their kinetic energy. It is hence more practical to create individual input files for each energy, and submit individual type 1 calculations. Furthermore, one can take advantage of the energy dependence of the mass energy transfer and absorption coefficients and use a logarithmic energy grid to reduce the number of high energy data points.
+
+The advantage of using a calculation type 1, tailored to the efficient computation of @muen_rho,
+can be seen in Figure \reflh{Fig1,1} where the efficiency gain of calculation type 1 over type 0 in air as function of photon energy is quantitatively shown for the original and the current implementation. The main difference is that the current implementation guarantees that the uncertainty in @muen_rho is equal to or less than the user-requested value @accu, while the  original implementation computed @muen_rho to an accuracy of 1.1\accu since @mutr_rho was calculated to the user-requested accuracy @accu and 1-@g to \accu/2. Calculation type 1 can be 20 times more efficient in the kilovoltage range and up to 80 times more efficient around 1 MeV.
+The efficiency gains decrease abruptly above the pair production threshold.
+
+@image html fig1.png "Figure 1. Efficiency gain of calculation type 1 over type 0 in air."
+
+\latexonly
+\begin{figure}[htb]
+\centering
+\includegraphics[width=15cm]{../figures/fig1}
+\caption{Efficiency gain of calculation type 1 over type 0 in air.}
+\label{Fig1}
+\end{figure}
+\endlatexonly
 
 A simple Bash script is provided here as an example of what one could do to submit multiple calculations on a logarithmic energy grid. By default it runs type 1 calculations
 in air for 10 energies between 1 keV and 1 MeV on a logarithmic energy grid in the available
@@ -724,15 +738,30 @@ exit 0
 
 \subsection accu_balance Speeding up calculations above 1 MeV
 
+As the energy of the photons increases over the pair production threshold, more high energy charged particles are produced and computing 1-@g down to @accu/2 becomes increasingly time
+consuming. To reduce the calculation time in this energy range, one might need to increase the  uncertainty in 1-@g and correspondingly decreasing it in @mutr_rho so that the accuracy of @muen_rho remains @accu.
 Further optimization of a `calculation type` 1 in the megavoltage energy range is possible 
 by modifying the target uncertainty in @mutr_rho and 1-@g according to the relationships:
 
-\f$\sigma(\mu_\mathrm{tr}) = \frac{\sigma}{\sqrt{m}} \qquad \textrm{and}
-\qquad \sigma(1-\overline{g})  = \frac{\sigma}{\sqrt{m/(m-1)}}\f$
+\f{equation}{
+\sigma(\mu_\mathrm{tr}) = \frac{\sigma}{\sqrt{m}} \qquad \textrm{and}
+\qquad \sigma(1-\overline{g})  = \frac{\sigma}{\sqrt{m/(m-1)}}
+\f}
 
 which guarantee a user-desired accuracy \accu in @muen_rho and where m = 2, 3, 4, .., etc. 
-A value of m = 2 is recommended for calculations around 1 MeV.
-Omitting m or setting m = 1 invokes the default approach which calculates @mutr_rho to the user-requested accuracy @accu and 1-@g to \accu/2. As a consequence, the accuracy in @muen_rho will be 1.1\f$\times\f$\accu. 
+The efficiency gain of a calculation type 1 over a type 0 in air as function of energy
+is shown in figure \reflh{Fig2,2} for different m values. A value of m = 2 is recommended for calculations around 1 MeV. Omitting m or setting m = 1 invokes the default approach.
+
+@image html fig2.png "Figure 2. Efficiency gain of calculation type 1 over type 0 in air for different m values."
+
+\latexonly
+\begin{figure}[htb]
+\centering
+\includegraphics[width=15cm]{../figures/fig2}
+\caption{Efficiency gain of calculation type 1 over type 0 in air for different m values.}
+\label{Fig1}
+\end{figure}
+\endlatexonly
 
 The input key for modifying m is `accuracy balance` as shown in
 the input block example below
