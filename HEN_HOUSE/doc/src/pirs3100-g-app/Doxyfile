@@ -226,6 +226,7 @@ ALIASES                = "internwarning=\par Warning:\n This class is not part o
                          "EM=\author Ernesto Mainegra-Hing, NRC" \
                          "BW=\author Blake Walters, NRC" \
                          "RT=\author Reid Townson, NRC" \
+                         "accu=\f$\sigma\f$" \
                          "g=\f$\overline{g}\f$" \
                          "mutr=\f$\mu_\mathrm{tr}\f$" \
                          "muen=\f$\mu_\mathrm{en}\f$" \
@@ -250,7 +251,7 @@ ALIASES                = "internwarning=\par Warning:\n This class is not part o
 ALIASES               += refl{1}="\latexonly\ref{\1}\endlatexonly"
 ALIASES               += refh{1}="\htmlonly \1 \endhtmlonly"
 ALIASES               += reflh{2}="\refl{\1}\refh{\2}"
-
+						 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
 # instance, some of the names that are used will be different. The list of all
@@ -293,7 +294,7 @@ OPTIMIZE_OUTPUT_VHDL   = NO
 # Note that for custom extensions you also need to set FILE_PATTERNS otherwise
 # the files are not read by doxygen.
 
-EXTENSION_MAPPING      =
+EXTENSION_MAPPING      = 
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -779,7 +780,7 @@ INPUT_ENCODING         = UTF-8
 # *.md, *.mm, *.dox, *.py, *.f90, *.f, *.for, *.tcl, *.vhd, *.vhdl, *.ucf,
 # *.qsf, *.as and *.js.
 
-FILE_PATTERNS          =
+FILE_PATTERNS          = 
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -1608,7 +1609,7 @@ PAPER_TYPE             = a4
 # If left blank no extra packages will be included.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-#EXTRA_PACKAGES         = listings
+#EXTRA_PACKAGES         = listings 
 #EXTRA_PACKAGES         = chngcntr
 
 # The LATEX_HEADER tag can be used to specify a personal LaTeX header for the
@@ -1625,7 +1626,7 @@ PAPER_TYPE             = a4
 # PROJECT_NAME), or the project number (see PROJECT_NUMBER).
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_HEADER           =
+LATEX_HEADER           = 
 #LATEX_HEADER           = pirs3100-header.tex
 
 # The LATEX_FOOTER tag can be used to specify a personal LaTeX footer for the
