@@ -62,7 +62,7 @@ the kerma calculation (non-radiative) and sub-threshold relaxation fluorescent p
 included as part of the energy lost to radiative events. An exhaustive discussion of these issues can be found in a detailed paper by Rogers and Townson
 ([Med.Phys.46 2019](https://doi.org/10.1002/mp.13744)).
 Version 1.5 fixes a bug in the calculation of \g for both calculation types when the photon
-energy is sampled from an energy spectrum. It also provides a cleaner output and an option for more verbose output. The code has been extensively documented and a doxygen based user's
+energy is sampled from an energy spectrum. It also provides a cleaner output and an option for more verbose output. The code has been extensively documented and a [Doxygen](https://www.doxygen.nl/index.html) based user's
 manual created.                                                    
 
 In the current version (1.6) the original algorithm of a `calculation type` 1 has been slightly adjusted to ensure a desired accuracy in @muen_rho and it has been made independent of the number of histories. The target accuracy now defaults to 1%. The possibility to further optimize `calculation type` 1 in the megavoltage energy range is introduced. The calculation progress messages during a type 1 calculation were made clearer and the documentation has been updated to reflect these changes.
