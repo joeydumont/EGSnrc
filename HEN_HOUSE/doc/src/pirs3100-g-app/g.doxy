@@ -759,7 +759,7 @@ is shown in figure \reflh{Fig2,2} for different m values. A value of m = 2 is re
 \centering
 \includegraphics[width=15cm]{../figures/fig2}
 \caption{Efficiency gain of calculation type 1 over type 0 in air for different m values.}
-\label{Fig1}
+\label{Fig2}
 \end{figure}
 \endlatexonly
 
